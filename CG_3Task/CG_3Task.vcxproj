@@ -88,12 +88,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\LibOpenGl\glew-2.1.0\include;C:\LibOpenGl\SFML-2.5.1\include;C:\LibOpenGl\assimp_test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Libs for C++\glew-2.1.0\include;C:\Libs for C++\SFML-2.5.1\include;C:\Libs for C++\assimp_test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\LibOpenGl\glew-2.1.0\lib\Release\Win32;C:\LibOpenGl\SFML-2.5.1\lib;C:\LibOpenGl\assimp_test\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Libs for C++\glew-2.1.0\lib\Release\Win32;C:\Libs for C++\SFML-2.5.1\lib;C:\Libs for C++\assimp_test\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>assimp-vc140-mt.lib;opengl32.lib;glew32.lib;sfml-graphics.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

@@ -59,56 +59,48 @@ int main()
 	Shader skybox("shaders/skybox.vs", "shaders/skybox.fs");
 
 	float vertices[] = {
-		-1.0f,  1.0f, -1.0f,
-		-1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-		 1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-
-		-1.0f, -1.0f,  1.0f,
-		-1.0f, -1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f, -1.0f,
-		-1.0f,  1.0f,  1.0f,
-		-1.0f, -1.0f,  1.0f,
-
-		 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-
-		-1.0f, -1.0f,  1.0f,
-		-1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f, -1.0f,  1.0f,
-		-1.0f, -1.0f,  1.0f,
-
-		-1.0f,  1.0f, -1.0f,
-		 1.0f,  1.0f, -1.0f,
-		 1.0f,  1.0f,  1.0f,
-		 1.0f,  1.0f,  1.0f,
-		-1.0f,  1.0f,  1.0f,
-		-1.0f,  1.0f, -1.0f,
+		-1.0f, 1.0f, -1.0f,
+		-1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, -1.0f,
+		1.0f, 1.0f, 1.0f,
 
 		-1.0f, -1.0f, -1.0f,
-		-1.0f, -1.0f,  1.0f,
-		 1.0f, -1.0f, -1.0f,
-		 1.0f, -1.0f, -1.0f,
-		-1.0f, -1.0f,  1.0f,
-		 1.0f, -1.0f,  1.0f
+		-1.0f, -1.0f, 1.0f,
+		1.0f, -1.0f, -1.0f,
+		1.0f, -1.0f, 1.0f,
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		1, 2, 3,
+
+		4, 5, 6,
+		5, 6, 7,
+
+		0, 1, 5,
+		0, 4, 5,
+
+		2, 3, 7,
+		2, 6, 7,
+
+		0, 2, 6,
+		0, 4, 6,
+
+		1, 5, 7,
+		1, 3, 7
 	};
 
 	Vertex_array skyboxVAO;
 	skyboxVAO.Bind();
 	Vertex_buffer skyboxVBO(vertices, sizeof(vertices) / sizeof(float));
 	skyboxVAO.AttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	unsigned int EBO;
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	std::string path = "textures/skybox/";
-	std::vector<std::string> faces {
+	std::vector<std::string> faces{
 		path + "right.png",
 		path + "left.png",
 		path + "top.png",
@@ -188,9 +180,7 @@ int main()
 		skybox.SetMat4("projection", projection);
 
 		skyboxVAO.Bind();
-		skyboxTexture.Bind(0);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		skyboxVAO.Bind(0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glDepthFunc(GL_LESS);
 
 		window.display();
@@ -201,5 +191,4 @@ int main()
 
 	window.close();
 	return 0;
-
 }
